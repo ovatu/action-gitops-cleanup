@@ -39,7 +39,7 @@ runs:
 
     - name: "Commit changes to GitOps repo"
       shell: bash
-      working-directory: ${{ inputs.directory }}
+      working-directory: gitops
       run: |
         git config user.name ${{ inputs.user-name }}
         git config user.email ${{ inputs.user-email }}
