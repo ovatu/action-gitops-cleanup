@@ -21,8 +21,6 @@ inputs:
     required: true
     default: ci@ovatu.com
     description: "Message to use as part of the GitOps commit"
-  slack-webhook-url:
-    description: "Slack webhook URL for end notification"
 runs:
   using: "composite"
   steps:
@@ -50,14 +48,3 @@ runs:
           git commit -am "${{ inputs.message }}"
           git push
         fi
-
-    - name: Send Slack webhook
-      if: inputs.slack-webhook-url
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        payload: |
-          {
-            "text": "${{ inputs.message }}"
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
